@@ -27,7 +27,7 @@ public class Main2Activity extends AppCompatActivity implements TodoAdapter.OnIt
     CheckBox checkBox;
     Helper helper;
     int importance;
-    TodoModel todoModel;
+
     String sc;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,12 +63,13 @@ public class Main2Activity extends AppCompatActivity implements TodoAdapter.OnIt
             @Override
             public void onClick(View v) {
                 if (name != null) {
-
-                    boolean s = todoModel.getFinished();
+                    TodoModel todoModel=new TodoModel();
+                    boolean s = todoModel.getFinished();// UVJEK JE FALSE
                   //  String we=
                     Toast.makeText(Main2Activity.this, "" + s, Toast.LENGTH_SHORT).show();
                     int r = adapter.getItemCount();
                     while (r >= 0) {
+                        // ovdje rtreba da se doda if(s==true)
                         helper.delete(r);
                         rc.setAdapter(adapter);
                         r--;

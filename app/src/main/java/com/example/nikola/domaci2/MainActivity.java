@@ -19,8 +19,8 @@ String name,password,username,userpassword;
         setContentView(R.layout.activity_main);
         editName=findViewById(R.id.editText);
         editPasword=findViewById(R.id.editText2);
-        username="1";//gdgpodgorica
-        userpassword="1";//anddev
+        username="gdgpodgorica";//
+        userpassword="anddev";//
    poz();
     }
 public void poz()
