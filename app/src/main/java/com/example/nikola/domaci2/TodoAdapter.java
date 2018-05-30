@@ -66,29 +66,11 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder> {
             public void onClick(View v) {
                 int a=position;
                 boolean sq = holder.checkBox.isChecked();
-                //  TodoModel R2_D2= new TodoModel();
-                //R2_D2.setFinished(sq);
-                //  td=list.get(position);
+
                 td.setFinished(sq);
                 Log.d("dd", "ovo je stanje: " + sq);
 
                 helper.update(a, td);
-
-                TodoModel td = new TodoModel();
-
-              //  td.setName(s);
-
-              //  intent2.putExtra("task2", td);
-
-               // setResult(RESULT_OK, intent2);
-               // finish();
-
-                //  helper.addNew(R2_D2);
-
-                /*
-                td.setFinished(sq);
-                td.setFinished(sq);
-*/
             }
         });
 }
