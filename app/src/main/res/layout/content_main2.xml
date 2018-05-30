@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.example.nikola.domaci2.Main2Activity"
+    tools:showIn="@layout/activity_main2">
+
+    <include layout="@layout/app_bar"
+        android:id="@+id/app_tolbar"
+        />
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rclist"
+        android:layout_below="@id/app_tolbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+    >
+
+    </android.support.v7.widget.RecyclerView>
+
+</RelativeLayout>

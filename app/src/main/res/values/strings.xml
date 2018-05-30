@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Domaci2</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="amdtodoapp">AMDTodoApp</string>
+    <string name="version_1_0">version 1.0</string>
+    <string name="username">Username</string>
+    <string name="pasword">Pasword</string>
+    <string name="todo_name">Todo name</string>
+    <string name="add_task">Add task</string>
+    <string name="todo_list">Todo List</string>
+    <string name="todo">TODO</string>
+    <string name="this_is_task">This is task</string>
+</resources>
