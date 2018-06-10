@@ -3,32 +3,26 @@ package com.example.nikola.domaci2;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
-import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class Main2Activity extends AppCompatActivity implements TodoAdapter.OnItemClickListener {
+public class HomeScreen extends AppCompatActivity implements TodoAdapter.OnItemClickListener {
     TextView title;
     String name;
     RecyclerView rc;
     TodoAdapter adapter;
     ImageView img_trash;
-    CheckBox checkBox;
     Helper helper;
     int importance;
+    int s=1;
 
-    String sc;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,10 +31,8 @@ public class Main2Activity extends AppCompatActivity implements TodoAdapter.OnIt
         setSupportActionBar(toolbar);
 
         title = findViewById(R.id.textTitle);
-        checkBox = findViewById(R.id.checkBox);
         img_trash = findViewById(R.id.trash);
-        delete();
-
+        setupListener();
 
 
         rc = findViewById(R.id.rclist);
@@ -52,30 +44,31 @@ public class Main2Activity extends AppCompatActivity implements TodoAdapter.OnIt
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Main2Activity.this, Main3Activity.class);
-                startActivityForResult(intent, 1);// BEZ OVOGA NIJE MOGLO????
+                Intent intent = new Intent(HomeScreen.this, AddTodo.class);
+                startActivityForResult(intent, 1);
             }
         });
     }
 
-    public void delete() {
+    public void setupListener() {
         img_trash.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (name != null) {
-                    TodoModel todoModel=new TodoModel();
+                    TodoModel todoModel = new TodoModel();
                     boolean s = todoModel.getFinished();// UVJEK JE FALSE
-                  //  String we=
-                    Toast.makeText(Main2Activity.this, "" + s, Toast.LENGTH_SHORT).show();
+                    //  String we=
+                    Toast.makeText(HomeScreen.this, "" + s, Toast.LENGTH_SHORT).show();
                     int r = adapter.getItemCount();
                     while (r >= 0) {
                         // ovdje rtreba da se doda if(s==true)
                         helper.delete(r);
                         rc.setAdapter(adapter);
                         r--;
+
                     }
                 } else
-                    Toast.makeText(Main2Activity.this, "Enter todo", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(HomeScreen.this, "Enter todo", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -83,14 +76,16 @@ public class Main2Activity extends AppCompatActivity implements TodoAdapter.OnIt
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1) {
+        if (requestCode == s) {
             TodoModel newTaskModel = data.getParcelableExtra("task");
-            name = newTaskModel.getName();
-            importance = newTaskModel.getImportance();
-            helper = new Helper(TodoModel.getModel());
 
-         adapter = new TodoAdapter(this, helper.getModelBills());
-            fillList(name, importance);
+          //  adapter.addNewItemToTheList(newTaskModel);
+           name = newTaskModel.getName();
+          importance = newTaskModel.getImportance();
+           helper = new Helper(TodoModel.getModel());
+
+            adapter = new TodoAdapter(this, helper.getModelBills());
+           fillList(name, importance);
         }
     }
 
@@ -98,7 +93,6 @@ public class Main2Activity extends AppCompatActivity implements TodoAdapter.OnIt
         TodoModel rt = new TodoModel();
         rt.setName(a);
         rt.setImportance(r);
-        //   rt.setFinished(b);
         if (helper.addNew(rt)) {
             rc.setAdapter(adapter);
         }

@@ -27,7 +27,6 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder> {
     TodoModel td;
     private List<TodoModel> list = new ArrayList<>();
     private OnItemClickListener onItemClickListener;
-    final Intent intent2 = new Intent();
     public TodoAdapter(Context context, List<TodoModel> list) {
         this.context = context;
         this.list = list;
@@ -68,8 +67,6 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder> {
                 boolean sq = holder.checkBox.isChecked();
 
                 td.setFinished(sq);
-                Log.d("dd", "ovo je stanje: " + sq);
-
                 helper.update(a, td);
             }
         });
@@ -83,7 +80,7 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder> {
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView todoName, todoTitle,xxx;
+        TextView todoName, todoTitle;
         CheckBox checkBox;
 
         public ViewHolder(View itemView) {
@@ -91,9 +88,7 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder> {
             todoName = itemView.findViewById(R.id.textName);
             todoTitle = itemView.findViewById(R.id.textTitle);
             checkBox = itemView.findViewById(R.id.checkBox);
-            xxx=itemView.findViewById(R.id.xxx);
-            xxx.setVisibility(View.GONE);
-            //  itemView.setTag(itemView);// ko zna ima li ovo smisla
+
 
         }
 

@@ -4,16 +4,20 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.util.ArrayList;
+
 public class TodoModel implements Parcelable {
 
-    boolean isFinished;
-    String name;
-    int importance;
+    private boolean isFinished;
+    private String name;
+    private int importance;
 
     protected TodoModel(Parcel in) {
         isFinished = in.readByte() != 0;
         name = in.readString();
         importance = in.readInt();
+    }
+
+    public TodoModel() {
     }
 
 
@@ -23,10 +27,6 @@ public class TodoModel implements Parcelable {
 
     public void setImportance(int importance) {
         this.importance = importance;
-    }
-
-
-    public TodoModel() {
     }
 
     public boolean getFinished() {

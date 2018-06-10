@@ -8,7 +8,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">//Theme.AppCompat.Light.NoActionBar
-        <activity android:name=".MainActivity">
+        <activity android:name=".LoginScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -16,7 +16,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Main2Activity"
+            android:name=".HomeScreen"
             android:label=""
             >
         <intent-filter>
@@ -25,7 +25,7 @@
             <category android:name="android.intent.category.DEFAULT" />
         </intent-filter>
         </activity>
-        <activity android:name=".Main3Activity">
+        <activity android:name=".AddTodo">
             <intent-filter>
                 <action android:name="com.example.nikola.Main3Activity" />
 

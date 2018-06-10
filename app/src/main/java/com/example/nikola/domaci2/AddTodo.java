@@ -9,7 +9,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class Main3Activity extends AppCompatActivity {
+public class AddTodo extends AppCompatActivity {
     TextView tvOne, tvTwo, tvThree;
     EditText edTodo;
     Button btnStart;
@@ -46,7 +46,7 @@ public class Main3Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 i = 1;
-                Toast.makeText(Main3Activity.this, "You chose first color" , Toast.LENGTH_SHORT).show();
+                Toast.makeText(AddTodo.this, "You chose first color" , Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -54,7 +54,7 @@ public class Main3Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 i = 2;
-                Toast.makeText(Main3Activity.this, "You chose second color" , Toast.LENGTH_SHORT).show();
+                Toast.makeText(AddTodo.this, "You chose second color" , Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -62,7 +62,7 @@ public class Main3Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 i = 3;
-                Toast.makeText(Main3Activity.this, "You chose third color" , Toast.LENGTH_SHORT).show();
+                Toast.makeText(AddTodo.this, "You chose third color" , Toast.LENGTH_SHORT).show();
             }
         });
 
