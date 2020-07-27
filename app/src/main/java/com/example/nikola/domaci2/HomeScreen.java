@@ -15,39 +15,42 @@ import android.widget.Toast;
 public class HomeScreen extends AppCompatActivity implements TodoAdapter.OnItemClickListener {
     TextView title;
     String name;
-    RecyclerView rc;
+    RecyclerView recyclerView;
     TodoAdapter adapter;
     ImageView img_trash;
     Helper helper;
     int importance;
-    int s=1;
-
+    int code = 1;
+    FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main2);
+        setContentView(R.layout.home_activity);
         final Toolbar toolbar = findViewById(R.id.app_tolbar);
         setSupportActionBar(toolbar);
 
-        title = findViewById(R.id.textTitle);
-        img_trash = findViewById(R.id.trash);
+        initData();
         setupListener();
 
-
-        rc = findViewById(R.id.rclist);
-        rc.setLayoutManager(new LinearLayoutManager
+        recyclerView.setLayoutManager(new LinearLayoutManager
                 (this, LinearLayoutManager.VERTICAL, false));
 
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(HomeScreen.this, AddTodo.class);
+                Intent intent = new Intent(HomeScreen.this, Todo.class);
                 startActivityForResult(intent, 1);
             }
         });
+    }
+
+    public void initData() {
+        title = findViewById(R.id.textTitle);
+        img_trash = findViewById(R.id.trash);
+        recyclerView = findViewById(R.id.rclist);
+        fab= (FloatingActionButton) findViewById(R.id.fab);
     }
 
     public void setupListener() {
@@ -61,9 +64,8 @@ public class HomeScreen extends AppCompatActivity implements TodoAdapter.OnItemC
                     Toast.makeText(HomeScreen.this, "" + s, Toast.LENGTH_SHORT).show();
                     int r = adapter.getItemCount();
                     while (r >= 0) {
-                        // ovdje rtreba da se doda if(s==true)
                         helper.delete(r);
-                        rc.setAdapter(adapter);
+                        recyclerView.setAdapter(adapter);
                         r--;
 
                     }
@@ -76,25 +78,22 @@ public class HomeScreen extends AppCompatActivity implements TodoAdapter.OnItemC
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == s) {
+        if (requestCode == code) {
             TodoModel newTaskModel = data.getParcelableExtra("task");
 
-          //  adapter.addNewItemToTheList(newTaskModel);
-           name = newTaskModel.getName();
-          importance = newTaskModel.getImportance();
-           helper = new Helper(TodoModel.getModel());
+            helper = new Helper(TodoModel.getModel());
 
-            adapter = new TodoAdapter(this, helper.getModelBills());
-           fillList(name, importance);
+            fillList(newTaskModel);
         }
     }
 
-    public void fillList(String a, int r) {
+    public void fillList(TodoModel td) {
         TodoModel rt = new TodoModel();
-        rt.setName(a);
-        rt.setImportance(r);
+
         if (helper.addNew(rt)) {
-            rc.setAdapter(adapter);
+            adapter = new TodoAdapter(this, helper.getModelBills());
+
+            recyclerView.setAdapter(adapter);
         }
     }
 

@@ -3,8 +3,8 @@
     <string name="title_activity_main2">Main2Activity</string>
     <string name="amdtodoapp">AMDTodoApp</string>
     <string name="version_1_0">version 1.0</string>
-    <string name="username">Username</string>
-    <string name="pasword">Pasword</string>
+    <string name="username">User name</string>
+    <string name="password">Password</string>
     <string name="todo_name">Todo name</string>
     <string name="add_task">Add task</string>
     <string name="todo_list">Todo List</string>

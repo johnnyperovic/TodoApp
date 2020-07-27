@@ -11,25 +11,26 @@ import android.widget.EditText;
 public class LoginScreen extends AppCompatActivity {
     EditText editName, editPasword;
     String name, password;
-    public static final String SUCCESSFUL_USERNAME = "gdgpodgorica";
-    public static final String SUCCESSFUL_USERPASWORD = "anddev";
+    public static final String SUCCESSFUL_USERNAME = "user";
+    public static final String SUCCESSFUL_USERPASWORD = "qwerty";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        editName = findViewById(R.id.editText);
-        editPasword = findViewById(R.id.editText2);
-
+        initValue();
         setupOnKeyListeners();
     }
 
+    private void initValue()
+    {
+        editName = findViewById(R.id.userName);
+        editPasword = findViewById(R.id.userPassword);
+    }
     public void setupOnKeyListeners() {
-
         editName.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
-                //
                 name = editName.getText().toString();
                 password = editPasword.getText().toString();
                 if (keyCode == event.KEYCODE_ENTER) {
@@ -45,7 +46,6 @@ public class LoginScreen extends AppCompatActivity {
                 name = editName.getText().toString();
                 password = editPasword.getText().toString();
                 if (keyCode == event.KEYCODE_ENTER) {
-
                     login(name, password);
                 }
                 return false;
@@ -71,6 +71,8 @@ public class LoginScreen extends AppCompatActivity {
             return;
         }
         Intent intent = new Intent(LoginScreen.this, HomeScreen.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
     }
 
