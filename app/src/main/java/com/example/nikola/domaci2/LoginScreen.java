@@ -71,8 +71,7 @@ public class LoginScreen extends AppCompatActivity {
             return;
         }
         Intent intent = new Intent(LoginScreen.this, HomeScreen.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+
         startActivity(intent);
     }
 

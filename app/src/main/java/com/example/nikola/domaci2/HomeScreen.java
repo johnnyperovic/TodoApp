@@ -1,5 +1,6 @@
 package com.example.nikola.domaci2;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -7,12 +8,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class HomeScreen extends AppCompatActivity implements TodoAdapter.OnItemClickListener {
+public class HomeScreen extends AppCompatActivity {
     TextView title;
     String name;
     RecyclerView recyclerView;
@@ -20,7 +22,7 @@ public class HomeScreen extends AppCompatActivity implements TodoAdapter.OnItemC
     ImageView img_trash;
     Helper helper;
     int importance;
-    int code = 1;
+    int code = -1;
     FloatingActionButton fab;
 
     @Override
@@ -50,27 +52,22 @@ public class HomeScreen extends AppCompatActivity implements TodoAdapter.OnItemC
         title = findViewById(R.id.textTitle);
         img_trash = findViewById(R.id.trash);
         recyclerView = findViewById(R.id.rclist);
-        fab= (FloatingActionButton) findViewById(R.id.fab);
+        fab = (FloatingActionButton) findViewById(R.id.fab);
     }
 
     public void setupListener() {
         img_trash.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (name != null) {
-                    TodoModel todoModel = new TodoModel();
-                    boolean s = todoModel.getFinished();// UVJEK JE FALSE
-                    //  String we=
-                    Toast.makeText(HomeScreen.this, "" + s, Toast.LENGTH_SHORT).show();
-                    int r = adapter.getItemCount();
-                    while (r >= 0) {
+                int r = adapter.getItemCount();
+                r = r - 1;
+                while (r >= 0) {
+                    if (helper.getModel().get(r).getFinished()) {
                         helper.delete(r);
-                        recyclerView.setAdapter(adapter);
-                        r--;
-
+                        adapter.notifyDataSetChanged();
                     }
-                } else
-                    Toast.makeText(HomeScreen.this, "Enter todo", Toast.LENGTH_SHORT).show();
+                    r--;
+                }
             }
         });
     }
@@ -78,27 +75,20 @@ public class HomeScreen extends AppCompatActivity implements TodoAdapter.OnItemC
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == code) {
+
+        if (resultCode == Activity.RESULT_OK) {
             TodoModel newTaskModel = data.getParcelableExtra("task");
-
-            helper = new Helper(TodoModel.getModel());
-
             fillList(newTaskModel);
         }
     }
 
     public void fillList(TodoModel td) {
-        TodoModel rt = new TodoModel();
-
-        if (helper.addNew(rt)) {
-            adapter = new TodoAdapter(this, helper.getModelBills());
-
+        helper = new Helper(TodoModel.getModel());
+        if (helper.addNew(td)) {
+            adapter = new TodoAdapter(this, helper.getModel());
             recyclerView.setAdapter(adapter);
         }
     }
 
-    @Override
-    public void onClickListener(int position) {
 
-    }
 }

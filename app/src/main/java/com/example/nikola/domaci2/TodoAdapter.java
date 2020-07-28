@@ -26,7 +26,7 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder> {
     Helper helper;
     TodoModel td;
     private List<TodoModel> list = new ArrayList<>();
-    private OnItemClickListener onItemClickListener;
+
     public TodoAdapter(Context context, List<TodoModel> list) {
         this.context = context;
         this.list = list;
@@ -48,29 +48,29 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder> {
         String s = (td.getName().substring(0, 1));
         holder.todoTitle.setText(s);
         holder.todoTitle.setTextColor(Color.WHITE);
-        int q = td.getImportance();
-        if (q == 1) {
+        final int color = td.getImportance();
+        if (color == 1) {
             holder.todoTitle.setBackgroundResource(R.drawable.text_view_circle);
         }
-        if (q == 2) {
+        if (color == 2) {
             holder.todoTitle.setBackgroundResource(R.drawable.text_view_circle2);
         }
-        if (q == 3) {
+        if (color == 3) {
             holder.todoTitle.setBackgroundResource(R.drawable.text_view_circle3);
         }
-
 
         holder.checkBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int a=position;
-                boolean sq = holder.checkBox.isChecked();
+                int i = position;
+                boolean isCheck = holder.checkBox.isChecked();
+                td.setFinished(isCheck);
 
-                td.setFinished(sq);
-                helper.update(a, td);
+                helper.update(i, td);
+                notifyDataSetChanged();
             }
         });
-}
+    }
 
 
     @Override
@@ -88,23 +88,9 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder> {
             todoName = itemView.findViewById(R.id.textName);
             todoTitle = itemView.findViewById(R.id.textTitle);
             checkBox = itemView.findViewById(R.id.checkBox);
-
-
-        }
-
-        public void bind(TodoModel item, final OnItemClickListener listener) {
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    listener.onClickListener(getLayoutPosition());
-
-                }
-            });
         }
     }
-
-    public interface OnItemClickListener {
-        void onClickListener(int position);
-    }
-
 }
+
+
+

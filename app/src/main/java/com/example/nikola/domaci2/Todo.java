@@ -1,5 +1,6 @@
 package com.example.nikola.domaci2;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -33,7 +34,7 @@ public class Todo extends AppCompatActivity implements View.OnClickListener {
             td.setName(taskT);
             td.setImportance(color);
             intent.putExtra("task", td);
-            setResult(RESULT_OK, intent);
+            setResult(Activity.RESULT_OK, intent);
             finish();
         }
     }

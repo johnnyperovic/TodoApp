@@ -8,7 +8,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LoginScreen">
+        <activity android:name=".LoginScreen"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -18,16 +19,18 @@
         <activity
             android:name=".HomeScreen"
             android:label=""
+            android:screenOrientation="portrait"
             >
         <intent-filter>
-            <action android:name="com.example.nikola.Main2Activity" />
+            <action android:name="com.example.nikola.HomeScreen" />
 
             <category android:name="android.intent.category.DEFAULT" />
         </intent-filter>
         </activity>
-        <activity android:name=".Todo">
+        <activity android:name=".Todo"
+            android:screenOrientation="portrait">
             <intent-filter>
-                <action android:name="com.example.nikola.Main3Activity" />
+                <action android:name="com.example.nikola.Todo" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
